@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Image gallery</title>
+</head>
+<body>
+    <img src="static/{{ number }}.png" alt="Image {{ number }}" width="200"><br>
+    {% if previous %}
+        <a href="/?number={{ previous }}">Previous</a><br>
+    {% endif %}
+    {% if next %}   
+        <a href="/?number={{ next }}">Next</a>
+    {% endif %}
+</body>
+</html>
