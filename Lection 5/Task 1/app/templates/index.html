@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+</head>
+<body>
+    <p>Register:</p>
+    <form action="/register" method="POST">
+        <label for="username">Username: </label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password: </label><br>
+        <input type="password" id="password" name="password" required><br>
+        <label for="confirm">Confirm password: </label><br>
+        <input type="password" id="confirm" name="confirm" required><br>
+        <input type="hidden" id="action" name="action" value="register">
+        <button id="submit" type="submit">Register</button>
+    </form>
+    <p>Send:</p>
+    <form action="/send" method="POST">
+        <label for="username">Username: </label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password: </label><br>
+        <input type="password" id="password" name="password" required><br>
+        <label for="message">Message: </label><br>
+        <textarea id="message" name="message" required></textarea><br>
+        <input type="hidden" id="action" name="action" value="send">
+        <button id="submit" type="submit">Send</button>
+    </form>
+    <div id="messages">{{ messages | safe }}</div>
+    <script>
+        function getChat() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("messages").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "/getAll");
+            xhttp.send();
+        }
+        window.setInterval(() => {
+            getChat();
+        }, 1000);
+    </script>
+</body>
+</html>
